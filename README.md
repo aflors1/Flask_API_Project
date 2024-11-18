@@ -140,7 +140,7 @@ Body: The following fields are required:
 
 * product_name: Name of the product (string).
 * category: Category of the product (must be predefined).
-* - categories = ["Electronics", "Clothing", "Books", "Home", "Baby", "Beauty", "Fitness", "Pet", "Holiday", "Kitchen"] 
+ - categories = ["Electronics", "Clothing", "Books", "Home", "Baby", "Beauty", "Fitness", "Pet", "Holiday", "Kitchen"] 
 * price: Price of the product (float between 1 and 1000).
 * in_stock: Boolean indicating if the product is in stock.
 * date_added: Date when the product was added (YYYY-MM-DD format, within the last year of the date you run the code).
