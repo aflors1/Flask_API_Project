@@ -2,7 +2,7 @@ import logging
 import time
 import pandas as pd 
 from datetime import datetime, timedelta
-from flask import Flask, Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify
 from .data_generator import generate_products
 import os
 
