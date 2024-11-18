@@ -41,6 +41,19 @@ This project is a Flask-based API for managing product data. It supports endpoin
 
 The app will run on http://127.0.0.1:5000.
 
+### **Generate Data**
+
+The function def generate_products() creates a data table and saves it as "products.csv". It is set to create one million rows. 
+
+   | Column | Type | Description |
+   | ------ | ---- | ----------- |
+   | product_id | Int | Unique identifier | 
+   | product_name | String | Randomly generated name | 
+   | category | String | Predefined list: ["Electronics", "Clothing", "Books", "Home", "Baby", "Beauty", "Fitness", "Pet", "Holiday", "Kitchen"]
+   | price | Float | Between 1 and 1000 | 
+   | in_stock | Boolean | True/False | 
+   | date_added | String | Randomly generated within the last year 
+
 ### **Available API Endpoints**
 
 #### **1. Filter Products by Category**
