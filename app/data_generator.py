@@ -1,6 +1,3 @@
-import random
-import string
-from datetime import datetime, timedelta
 from faker import Faker
 import pandas as pd
 import numpy as np
