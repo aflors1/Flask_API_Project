@@ -5,8 +5,8 @@ import numpy as np
 # Initialize Faker(), predefined categories, and dates 
 fake = Faker()
 categories = ["Electronics", "Clothing", "Books", "Home", "Baby", "Beauty", "Fitness", "Pet", "Holiday", "Kitchen"]
-start_date = np.datetime64("today") 
-end_date = start_date + np.timedelta64(365, "D")
+start_date = np.datetime64("today") - np.timedelta64(365, "D")
+end_date = np.datetime64("today")
 
 # Generate data to meet specifications
 def generate_products(n=1000000):
