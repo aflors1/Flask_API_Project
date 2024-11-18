@@ -2,18 +2,18 @@
 
 ### **Overview**
 
-This project is a Flask-based API for managing product data. It supports endpoints for filtering, sorting, and adding products, as well as retrieving recent products and counting in-stock items. The product data is generated and saved as a CSV file.
+This project is a Flask-based API for managing product data. It supports endpoints for filtering, sorting, adding products, retrieving recent products, and counting in-stock items. The product data is generated and saved as a CSV file with one million rows and 6 columns. 
 
 ---
 
 ### **Features**
 
 - **Filter Products by Category:** Filter products based on their category with pagination.
-- **Filter by Price Range:** Retrieve products within a specified price range.
+- **Filter by Price Range:** Retrieve products within a specified price range with pagination.
 - **Sort Products by Price:** Sort products in ascending or descending order with pagination.
 - **Count In-Stock Products:** Get the count of products currently in stock.
-- **Retrieve Recent Products:** Get the 10 most recently added products.
-- **Add New Products:** Add a new product to the dataset after validation.
+- **Retrieve Recent Products:** Get the 10 most recently added products by added_date. 
+- **Add New Products:** Add a new product to the dataset after validation that it meets specifications. 
 
 ---
 
@@ -23,7 +23,6 @@ This project is a Flask-based API for managing product data. It supports endpoin
 
 - Python 3.9+ installed
 - `pip` for managing Python packages
-- Recommended: Virtual environment (`venv`) for isolating dependencies
 
 #### **Installation**
 
@@ -52,14 +51,14 @@ Method: GET
 
 Query Parameters:
 
-* category: (optional) Filter products by category.
+* category: Filter products by category.
 * page: (optional) Page number (default is 1).
 * per_page: (optional) Number of products per page (default is 10).
 
 Example:
 
 ```bash
-GET http://127.0.0.1:5000/filter_products?category=Electronics&page=1&per_page=5
+GET http://127.0.0.1:5000/filter_products?category=Clothing&page=1&per_page=5
 ```
 #### **2. Filter Products by Price** 
 
@@ -69,8 +68,8 @@ Method: GET
 
 Query Parameters:
 
-* min_price: Minimum price (default is 0).
-* max_price: Maximum price (default is unlimited).
+* min_price: Minimum price 
+* max_price: Maximum price 
 * page: Page number (default is 1).
 * per_page: Number of products per page (default is 100).
 
@@ -127,10 +126,11 @@ Method: POST
 Body: The following fields are required:
 
 * product_name: Name of the product (string).
-* category: Category of the product (must be predefined, e.g., "Electronics").
+* category: Category of the product (must be predefined).
+* - categories = ["Electronics", "Clothing", "Books", "Home", "Baby", "Beauty", "Fitness", "Pet", "Holiday", "Kitchen"] 
 * price: Price of the product (float between 1 and 1000).
 * in_stock: Boolean indicating if the product is in stock.
-* date_added: Date when the product was added (YYYY-MM-DD format, within the last year).
+* date_added: Date when the product was added (YYYY-MM-DD format, within the last year of the date you run the code).
 
 Example:
 
@@ -138,9 +138,9 @@ Example:
 POST http://127.0.0.1:5000/products
 Content-Type: application/json
 {
-  "product_name": "Smartphone",
-  "category": "Electronics",
-  "price": 699.99,
+  "product_name": "T-shirt",
+  "category": "Clothing",
+  "price": 19.99,
   "in_stock": true,
   "date_added": "2024-11-10"
 } 
@@ -154,13 +154,17 @@ Run the unit tests to ensure all endpoints function correctly:
 
 ```bash
 pytest
+
+# to run separately 
+pytest test/test_routes.py 
+pytest test/test_data_generator.py 
 ```
 ### **Logging**
 
-Logs are generated to track data generation progress and API usage. They include metrics like:
+Logs are generated to track data generation progress. Metrics include:
 
 * Data generation time
-* File writing time
+* I/O file writing time
 * File size
 
 Logs are output to the console for debugging purposes.
@@ -187,13 +191,13 @@ flask_api_project/
 
 ### **Future Improvements**
 
-1. Increase the speed of def generate_products() 
+1. Product names that make sense 
 
-   This program usually averages 80-90 seconds to generate one million rows. I think this could be optimized more to reach closer to one minute. 
+   Right now the product names are random words so they may not be nouns much less nouns that make sense for their category. Checking to make sure they were nouns drastically slowed down the program. In this case, speed was prioritized as the names themselves were not as important in getting the API functioning.  
 
-2. Table to track logs for runtime
+2. Table to track logs for runtime 
 
-   I'd like to output the logs for each run with a timestamp, file size, and time it took to generate data into a CSV for better performance tracking. 
+   Create a control table of runs to output the timestamp, file size, and time it took to generate data into a CSV for better performance tracking. 
 
 3. Additional unit test 
 
@@ -201,4 +205,4 @@ flask_api_project/
 
 4. More flexibility with Top Recent Products API
 
-   It would be nice to give more flexibility with this one to show a different number of top products rather than always just the top 10 because there are most likely more than 10 products with the same, latest added date. 
+   More flexibility with this one to show a different number of top products rather than always just the top 10 because there are most likely more than 10 products with the same, latest added date. 
