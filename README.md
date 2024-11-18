@@ -37,7 +37,7 @@ This project is a Flask-based API for managing product data. It supports endpoin
 
 3. Start the Flask application to access the API in Postman or the browser:
     ```bash
-    python -m app
+    python -m app.run
 
 The app will run on http://127.0.0.1:5000.
 
@@ -177,7 +177,7 @@ flask_api_project/
 │
 ├── app/
 │   ├── __init__.py            # Testing app setup
-│   ├── __main__.py            # Flask app setup
+│   ├── run.py                 # Run Flask API 
 │   ├── routes.py              # API routes and logic
 │   ├── data_generator.py      # Product data generation logic
 │
