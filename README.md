@@ -121,7 +121,7 @@ GET http://127.0.0.1:5000/products/recent
 
 URL: /products
 
-Method: POST
+Method: POST - use Postman or other developer tool 
 
 Body: The following fields are required:
 
@@ -136,6 +136,7 @@ Example:
 
 ```bash
 POST http://127.0.0.1:5000/products
+
 Content-Type: application/json
 {
   "product_name": "T-shirt",
@@ -205,4 +206,4 @@ flask_api_project/
 
 4. More flexibility with Top Recent Products API
 
-   More flexibility with this one to show a different number of top products rather than always just the top 10 because there are most likely more than 10 products with the same, latest added date. 
+   More flexibility with this one to show a different number of top products rather than always just the top 10 because there are most likely more than 10 products with the same, latest added date. Additional levels of sorting would also be helpful here so it could sort on date_added and price for example. 
