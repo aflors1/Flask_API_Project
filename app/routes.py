@@ -5,15 +5,11 @@ from datetime import datetime, timedelta
 from flask import Flask, Blueprint, request, jsonify
 from .data_generator import generate_products
 import os
-import psutil
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 
 app = Blueprint('app',__name__)
-
-# Initialize Flask 
-# app = Flask(__name__)
 
 # Track execution time for data generation
 start_time = time.time()
@@ -250,8 +246,3 @@ def add_product():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-# Start the app
-# if __name__ == '__main__':
-    #generate_and_save_data() 
-    # app.run(debug=True, use_reloader=False)

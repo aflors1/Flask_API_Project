@@ -1,11 +1,11 @@
 import unittest
-from app import create_app  # Import create_app to initialize the app
+from app import create_app 
 
 class TestFlaskAPI(unittest.TestCase):
     
     def setUp(self):
         self.app = create_app().test_client()
-        self.app.testing = True  # Ensure testing mode is enabled
+        self.app.testing = True  # Enable testing mode 
 
     def test_add_product(self):
         response = self.app.post('/products', json={
@@ -23,19 +23,19 @@ class TestFlaskAPI(unittest.TestCase):
 
     def test_filter_by_price(self):
         response = self.app.get('/products/price', query_string={'min_price': 10, 'max_price': 100})
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200) # Expecting a 200 OK response
 
     def test_filter_products(self):
         response = self.app.get('/filter_products', query_string={'category': 'Electronics'})
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200) # Expecting a 200 OK response
 
     def test_sort_products(self):
         response = self.app.get('/products/sort', query_string={'order': 'asc'})
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200) # Expecting a 200 OK response
 
     def test_top_recent_products(self):
         response = self.app.get('/products/recent')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200) # Expecting a 200 OK response
 
 if __name__ == '__main__':
     unittest.main()
