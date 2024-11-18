@@ -13,10 +13,16 @@ class TestDataGenerator(unittest.TestCase):
 
     def test_large_dataset(self):
         # Test for generating a large dataset - handles at least a million rows
-        n = 1005000
-        result = generate_products(n)
+        result = generate_products(1005000)
         self.assertIsInstance(result, pd.DataFrame)
-        self.assertEqual(len(result), n)
+        self.assertEqual(len(result), 1005000)
+
+    def test_invalid_input(self):
+        # Test for invalid input
+        with self.assertRaises(TypeError):
+            generate_products("string")  # Pass a string instead of an integer
+        with self.assertRaises(ValueError):
+            generate_products(-10)  # Pass a negative number
 
     def test_column_names(self):
         # Test that product.csv has the correct column names
@@ -44,15 +50,8 @@ class TestDataGenerator(unittest.TestCase):
         self.assertTrue(0.8 <= in_stock_count / len(result) <= 0.9)
         self.assertTrue(0.1 <= out_of_stock_count / len(result) <= 0.2)
 
-    def test_invalid_input(self):
-        # Test for invalid input
-        with self.assertRaises(TypeError):
-            generate_products("string")  # Pass a string instead of an integer
-        with self.assertRaises(ValueError):
-            generate_products(-10)  # Pass a negative number
-
     def test_dates_within_last_year(self):
-        #Test that the smallest date is less than or equal to the current date
+        #Test valid date range 
         result = generate_products(1000) 
         current_date = np.datetime64('today', 'D')
         one_year_ago = current_date - np.timedelta64(365, 'D')

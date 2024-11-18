@@ -186,7 +186,7 @@ def validate_product(product):
 
     # Validate category (must be a predefined category)
     if 'category' not in product or product['category'] not in categories:
-        return f"Invalid category: must be one of {categories}."
+        return f"Invalid category: must proper case and one of {categories}."
 
     # Validate price (must be between 1 and 1000)
     if 'price' not in product or not isinstance(product['price'], float) or not (1 <= product['price'] <= 1000):
