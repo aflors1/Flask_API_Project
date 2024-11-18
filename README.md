@@ -84,7 +84,7 @@ Query Parameters:
 * min_price: Minimum price 
 * max_price: Maximum price 
 * page: Page number (default is 1).
-* per_page: Number of products per page (default is 100).
+* per_page: Number of products per page (default is 10).
 
 Example:
 
@@ -112,7 +112,7 @@ Query Parameters:
 
 * order: Sorting order (asc for ascending or desc for descending).
 * page: Page number (default is 1).
-* per_page: Number of products per page (default is 5).
+* per_page: Number of products per page (default is 10).
 
 Example:
 

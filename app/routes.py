@@ -9,8 +9,6 @@ import os
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 
-app = Blueprint('app',__name__)
-
 # Track execution time for data generation
 start_time = time.time()
 
@@ -44,6 +42,9 @@ generate_and_save_data()
 
 # Load CSV 
 df = pd.read_csv("products.csv")
+
+# Initialize FLASK API app 
+app = Blueprint('app',__name__)
     
 #### API ENDPOINTS ####
 
@@ -90,7 +91,7 @@ def filter_by_price():
     min_price = float(request.args.get('min_price', 0))
     max_price = float(request.args.get('max_price', float('inf')))
     page = int(request.args.get('page', 1))
-    per_page = int(request.args.get('per_page', 100))
+    per_page = int(request.args.get('per_page', 10))
 
     # Filter products by price range
     filtered_products = df[(df['price'] >= min_price) & (df['price'] <= max_price)]
@@ -134,7 +135,7 @@ def sort_products():
     sort_order = request.args.get('order', 'asc')
     ascending = True if sort_order == 'asc' else False
     page = request.args.get('page', 1, type=int)
-    per_page = request.args.get('per_page', 5, type=int)
+    per_page = request.args.get('per_page', 10, type=int)
 
     # Sort data by price
     sorted_df = df.sort_values(by='price', ascending=ascending)
