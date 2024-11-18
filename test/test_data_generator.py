@@ -1,7 +1,7 @@
 import unittest
 import pandas as pd
-from app.data_generator import generate_products  
-from datetime import datetime 
+import numpy as np
+from app.data_generator import generate_products   
 
 class TestDataGenerator(unittest.TestCase):
 
@@ -54,16 +54,15 @@ class TestDataGenerator(unittest.TestCase):
     def test_dates_within_last_year(self):
         #Test that the smallest date is less than or equal to the current date
         result = generate_products(1000) 
-        current_date = datetime.today().date()
+        current_date = np.datetime64('today', 'D')
+        one_year_ago = current_date - np.timedelta64(365, 'D')
         
-        # Convert 'date_added' to datetime.date 
-        dates = pd.to_datetime(result['date_added']).dt.date  
+        # Convert 'date_added' to match the format of generated dates
+        dates = np.array(pd.to_datetime(result['date_added']).dt.date, dtype='datetime64[D]')  
         
-        # Find the earliest date
-        min_date = dates.min()
-        
-        # Ensure the smallest date is <= the current date (within the last year)
-        self.assertTrue(min_date <= current_date) 
+        # Ensure that all dates are within the last year
+        self.assertTrue(dates.min() >= one_year_ago)  
+        self.assertTrue(dates.max() <= current_date)  
 
 if __name__ == "__main__":
     unittest.main()
