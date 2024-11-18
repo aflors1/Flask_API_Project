@@ -47,7 +47,7 @@ The function def generate_products() creates a data table and saves it as "produ
 
    | Column | Type | Description |
    | ------ | ---- | ----------- |
-   | product_id | Int | Unique identifier | 
+   | product_id | Integer | Unique identifier | 
    | product_name | String | Randomly generated name | 
    | category | String | Predefined list: ["Electronics", "Clothing", "Books", "Home", "Baby", "Beauty", "Fitness", "Pet", "Holiday", "Kitchen"]
    | price | Float | Between 1 and 1000 | 
